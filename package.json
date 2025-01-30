@@ -1,9 +1,9 @@
 {
-  "name": "teste",
+  "name": "ait-management-api",
   "version": "1",
   "main": "index.js",
   "license": "MIT",
-  "description": "teste back end",
+  "description": "Api de geração e processamentos de ait (projeto teste para vaga de back-end pleno na empresa áurea-phigital",
   "author": "Brendon Lee",
   "dependencies": {
     "@nestjs/common": "^11.0.6",
