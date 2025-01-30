@@ -4,10 +4,10 @@ export class AITViewModel {
   static toHttp(ait: AIT) {
     return {
       id: ait.id,
-      placa_veiculo: ait.placaVeiculo, // Mudei para usar `placa_veiculo`
+      placa_veiculo: ait.placaVeiculo,
       data_infracao: ait.dataInfracao,
       descricao: ait.descricao,
-      valor_multa: ait.valorMulta.toFixed(2), // Convertendo Decimal para string formatada
+      valor_multa: ait.valorMulta.toFixed(2),
     };
   }
 

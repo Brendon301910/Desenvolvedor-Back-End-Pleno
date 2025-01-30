@@ -11,7 +11,7 @@ describe('GetAITUseCase', () => {
 
   beforeEach(async () => {
     aitRepositoryMock = {
-      create: jest.fn().mockResolvedValue(undefined), // Mock da função 'create' retornando uma promessa resolvida
+      create: jest.fn().mockResolvedValue(undefined),
       findAll: jest.fn(),
       findByPlacaVeiculo: jest.fn(),
       update: jest.fn(),
@@ -38,7 +38,7 @@ describe('GetAITUseCase', () => {
         placaVeiculo: 'ABC1234',
         dataInfracao: new Date(),
         descricao: 'Descricao de teste',
-        valorMulta: new Decimal(100), // Valor como Decimal
+        valorMulta: new Decimal(100),
       });
       const aitsMock = [aitMock];
 
@@ -70,7 +70,7 @@ describe('GetAITUseCase', () => {
       placaVeiculo: 'ABC1234',
       dataInfracao: new Date(),
       descricao: 'Descricao de teste',
-      valorMulta: new Decimal(100), // Valor como Decimal
+      valorMulta: new Decimal(100),
     });
 
     const aitsMock = {
@@ -82,9 +82,8 @@ describe('GetAITUseCase', () => {
 
     const result = await useCase.getAll({ limit: 10, page: 1 });
 
-    // Corrigindo a expectativa para considerar a estrutura correta do retorno
     expect(result).toEqual({
-      data: aitsMock, // Considerando a estrutura de 'aits' e 'total'
+      data: aitsMock,
       metadata: aitsMock.total,
     });
     expect(aitRepositoryMock.findAll).toHaveBeenCalledWith(10, 1);

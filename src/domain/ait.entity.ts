@@ -52,7 +52,6 @@ export class AIT {
     descricao: string,
     valorMulta: Decimal,
   ) {
-    // Criando objeto com novos valores
     const updatedProps: AITProps = {
       placaVeiculo,
       dataInfracao,
@@ -60,10 +59,8 @@ export class AIT {
       valorMulta,
     };
 
-    // Revalidando os novos valores
     this.validate(updatedProps);
 
-    // Atualizando os valores apenas se forem válidos
     this._placaVeiculo = placaVeiculo;
     this._dataInfracao = dataInfracao;
     this._descricao = descricao;
@@ -72,8 +69,6 @@ export class AIT {
   public get id() {
     return this._id;
   }
-
-  // Getters e Setters para os campos restantes
 
   public get placaVeiculo() {
     return this._placaVeiculo;

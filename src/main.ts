@@ -7,14 +7,12 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  // Habilita validação global
   app.useGlobalPipes(
     new ValidationPipe({
-      transform: true, // Habilita a transformação de tipos
+      transform: true,
     }),
   );
 
-  // Configuração do Swagger
   const config = new DocumentBuilder()
     .setTitle('API de AITs')
     .setDescription(

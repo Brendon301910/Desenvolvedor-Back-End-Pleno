@@ -1,4 +1,4 @@
 export const RabbitMQConfig = {
-  uri: 'amqp://localhost:5672', // URL do RabbitMQ (ajuste se necessário)
-  queue: 'csv_queue', // Nome da fila onde os arquivos CSV serão enviados
+  uri: 'amqp://localhost:5672',
+  queue: 'csv_queue',
 } as const;

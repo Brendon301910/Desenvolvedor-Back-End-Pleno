@@ -10,7 +10,7 @@ describe('UpdateAITUseCase', () => {
 
   beforeEach(() => {
     aitRepositoryMock = {
-      create: jest.fn().mockResolvedValue(undefined), // Mock da função 'create' retornando uma promessa resolvida
+      create: jest.fn().mockResolvedValue(undefined),
       findAll: jest.fn(),
       findByPlacaVeiculo: jest.fn(),
       update: jest.fn(),
@@ -22,7 +22,6 @@ describe('UpdateAITUseCase', () => {
   });
 
   it('should update an AIT successfully', async () => {
-    // Mock do AIT para ser retornado pelo findById
     const existingAIT = new AIT({
       placaVeiculo: 'ABC1234',
       dataInfracao: new Date('2023-01-01'),
@@ -30,7 +29,6 @@ describe('UpdateAITUseCase', () => {
       valorMulta: new Decimal(100),
     });
 
-    // Mock do repositório, retornando o AIT existente
     aitRepositoryMock.findById.mockResolvedValue(existingAIT);
 
     const updatedAITRequest = {
@@ -43,10 +41,8 @@ describe('UpdateAITUseCase', () => {
       },
     };
 
-    // Executando o caso de uso
     await useCase.execute(updatedAITRequest);
 
-    // Esperando que o método 'update' tenha sido chamado com o ID e AIT atualizado
     expect(aitRepositoryMock.findById).toHaveBeenCalledWith('123');
     expect(aitRepositoryMock.update).toHaveBeenCalledWith(
       '123',
@@ -62,7 +58,6 @@ describe('UpdateAITUseCase', () => {
   });
 
   it('should throw an error when AIT is not found', async () => {
-    // Simulando que o AIT não foi encontrado no repositório
     aitRepositoryMock.findById.mockResolvedValue(null);
 
     const updatedAITRequest = {
@@ -74,8 +69,6 @@ describe('UpdateAITUseCase', () => {
         valor_multa: new Decimal(200),
       },
     };
-
-    // Esperando que o método lance uma exceção caso o AIT não seja encontrado
     await expect(useCase.execute(updatedAITRequest)).rejects.toThrow(
       new NotFoundException('AIT com ID 123 não encontrado.'),
     );

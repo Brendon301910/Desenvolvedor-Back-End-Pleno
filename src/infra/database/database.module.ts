@@ -3,7 +3,7 @@ import { PrismaService } from './prisma/prisma.service';
 import { PrismaAITRepository } from './prisma/repositories/prisma-ait.repository';
 
 @Module({
-  providers: [PrismaService, PrismaAITRepository], // Adicione o PrismaService e o PrismaAITRepository
-  exports: [PrismaService, PrismaAITRepository], // Exporte o PrismaService e o PrismaAITRepository
+  providers: [PrismaService, PrismaAITRepository],
+  exports: [PrismaService, PrismaAITRepository],
 })
 export class DatabaseModule {}

@@ -16,7 +16,7 @@ export default {
     '!src/**/*.module.ts',
   ],
   coverageDirectory: './coverage',
-  modulePaths: [compilerOptions.baseUrl], // Adiciona suporte ao baseUrl do tsconfig
+  modulePaths: [compilerOptions.baseUrl],
   moduleDirectories: ['node_modules', '<rootDir>'],
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
     prefix: '<rootDir>/',

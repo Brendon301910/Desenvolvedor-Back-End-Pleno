@@ -10,7 +10,7 @@ describe('RemoveAITUseCase', () => {
 
   beforeEach(() => {
     aitRepositoryMock = {
-      create: jest.fn().mockResolvedValue(undefined), // Mock da função 'create' retornando uma promessa resolvida
+      create: jest.fn().mockResolvedValue(undefined),
       findAll: jest.fn(),
       findByPlacaVeiculo: jest.fn(),
       update: jest.fn(),
@@ -26,25 +26,23 @@ describe('RemoveAITUseCase', () => {
       placaVeiculo: 'ABC1234',
       dataInfracao: new Date(),
       descricao: 'Descricao de teste',
-      valorMulta: new Decimal(100), // O valor pode ser tratado como número ou Decimal
+      valorMulta: new Decimal(100),
     });
 
     console.log(aitMock);
-    // Mock do repositório, retornando o AIT para simular a remoção bem-sucedida
+
     aitRepositoryMock.removeById.mockResolvedValue(aitMock);
 
     const result = await useCase.removeById({ id: '123' });
 
-    expect(result).toEqual(aitMock); // Espera que o AIT retornado seja o mesmo
+    expect(result).toEqual(aitMock);
     expect(aitRepositoryMock.removeById).toHaveBeenCalledWith('123');
     expect(aitRepositoryMock.removeById).toHaveBeenCalledTimes(1);
   });
 
   it('should throw a NotFoundException when AIT is not found', async () => {
-    // Mock do repositório, simulando que o AIT não foi encontrado
     aitRepositoryMock.removeById.mockResolvedValue(null);
 
-    // Espera que o método lance a exceção
     await expect(useCase.removeById({ id: '123' })).rejects.toThrow(
       new NotFoundException('AIT com ID 123 não encontrado.'),
     );

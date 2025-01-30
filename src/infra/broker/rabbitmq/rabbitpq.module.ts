@@ -1,4 +1,3 @@
-// infra/broker/rabbitmq/rabbitmq.module.ts
 import { Module } from '@nestjs/common';
 import { RabbitMQProducer } from './rabbitmq.producer';
 import { RABBITMQ_SERVICE } from './rabbitmq.constants';
@@ -17,6 +16,6 @@ import { RabbitMQConsumer } from './rabbitmq.consumer';
     },
     RabbitMQConsumer,
   ],
-  exports: [RabbitMQProducer, RabbitMQConsumer], // Exporte o RabbitMQProducer para que ele possa ser injetado em outros módulos
+  exports: [RabbitMQProducer, RabbitMQConsumer],
 })
 export class RabbitMQModule {}
