@@ -4,19 +4,21 @@
     "declaration": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
     "target": "es2017",
     "sourceMap": true,
-    "types": ["node"],
+    "types": ["node", "jest"],
     "outDir": "./dist",
-    "baseUrl": "./", 
+    "baseUrl": "./",
     "paths": {
-      "infra/http/*": ["src/infra/http/*"],  // Mapeia a subpasta 'http'
-      "infra/database/*": ["src/infra/database/*"],  // Mapeia a subpasta 'database'
-      "infra/repositories/*": ["src/infra/repositories/*"],  // Mapeia a subpasta 'repositories'
-      "application/*": ["src/application/*"],  // Mapeia 'application/*'
-      "domain/*": ["src/domain/*"]  // Mapeia 'domain/*'
+      "infra/http/*": ["src/infra/http/*"],
+      "infra/database/*": ["src/infra/database/*"],
+      "infra/repositories/*": ["src/infra/repositories/*"],
+      "application/*": ["src/application/*"],
+      "domain/*": ["src/domain/*"]
     },
     "incremental": true,
     "skipLibCheck": true,
@@ -26,6 +28,6 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false
   },
-  "include": ["src/**/*"],  // Incluir todos os arquivos dentro da pasta 'src'
-  "exclude": ["node_modules", "dist"]  // Excluir a pasta 'node_modules' e 'dist'
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
 }

@@ -1,6 +1,10 @@
+import { url } from 'inspector';
 // infra/broker/rabbitmq/rabbitmq.consumer.ts
 import { Injectable, OnModuleDestroy } from '@nestjs/common';
 import { Channel, Connection, connect } from 'amqplib'; // Use amqplib para obter Connection e Channel
+import axios from 'axios';
+import path from 'path';
+import * as fs from 'fs';
 
 @Injectable()
 export class RabbitMQConsumer implements OnModuleDestroy {
@@ -39,8 +43,33 @@ export class RabbitMQConsumer implements OnModuleDestroy {
 
   // Simula o "download" da mensagem, você pode adaptar para o seu caso
   private downloadMessage(messageContent: any) {
-    console.log('Baixando a mensagem:', messageContent);
-    // Implementação do download ou processamento aqui
+    try {
+      const sourcePath = messageContent; // Caminho do arquivo no sistema local
+      const destinationDir = path.join(__dirname, 'downloads'); // Diretório de destino para salvar o arquivo
+
+      // Verifique se o arquivo de origem existe
+      if (fs.existsSync(sourcePath)) {
+        // Crie o diretório de destino se não existir
+        if (!fs.existsSync(destinationDir)) {
+          fs.mkdirSync(destinationDir, { recursive: true });
+        }
+
+        // Defina o caminho do arquivo de destino
+        const destinationPath = path.join(
+          destinationDir,
+          path.basename(sourcePath),
+        );
+
+        // Copie o arquivo para o diretório de destino
+        fs.copyFileSync(sourcePath, destinationPath);
+
+        console.log('Arquivo copiado com sucesso para:', destinationPath);
+      } else {
+        console.error('O arquivo não foi encontrado:', sourcePath);
+      }
+    } catch (error) {
+      console.error('Erro ao mover o arquivo:', error);
+    }
   }
 
   // Método para fechar a conexão corretamente quando o serviço for destruído
