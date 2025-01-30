@@ -36,6 +36,7 @@ export class ProcessAITUseCase {
     const csvWriter = createObjectCsvWriter({
       path: filePath,
       header: [
+        { id: 'id', title: 'Id' },
         { id: 'placaVeiculo', title: 'Placa Veículo' },
         { id: 'dataInfracao', title: 'Data Infração' },
         { id: 'descricao', title: 'Descrição' },
