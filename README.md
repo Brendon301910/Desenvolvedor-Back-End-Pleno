@@ -9,7 +9,9 @@ Este projeto fornece uma API para gerenciar AITs (Autos de Infração de Trânsi
 - **Prisma** - ORM para interação com banco de dados
 - **RabbitMQ** - Fila de mensageria
 - **Yarn** - Gerenciador de pacotes
-
+- **Swagger**: Interface para documentação da API.
+- **Zod**: Biblioteca para validação de dados.
+- **csv-writer**: Para gerar arquivos CSV.
 ## Pré-requisitos
 
 Certifique-se de ter as seguintes ferramentas instaladas:
