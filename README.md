@@ -37,8 +37,8 @@ Certifique-se de ter as seguintes ferramentas instaladas:
 Este projeto utiliza variáveis de ambiente para configurar a conexão com o banco de dados e a fila de mensageria. Crie um arquivo `.env` na raiz do projeto com as variáveis a seguir:
 
 ```env
-DATABASE_URL=postgresql://usuario:senha@localhost:5432/banco_de_dados
-RABBITMQ_URL=amqp://localhost
+DATABASE_URL=postgresql://postgres:postgres@localhost:5432/aits?schema=public
+RABBITMQ_URL=amqp://localhost:5672
 ```
 
 ### Como rodar o projeto usando Docker
