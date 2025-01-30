@@ -17,12 +17,10 @@ export class PrismaService
     });
   }
 
-  // Conectar ao banco de dados quando o módulo for inicializado
   async onModuleInit() {
     await this.$connect();
   }
 
-  // Desconectar do banco de dados quando o módulo for destruído
   async onModuleDestroy() {
     await this.$disconnect();
   }

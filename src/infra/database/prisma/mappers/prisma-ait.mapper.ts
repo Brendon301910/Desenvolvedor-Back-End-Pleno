@@ -1,20 +1,17 @@
-import { AIT as AITPrisma } from '@prisma/client'; // Modelo de AIT gerado pelo Prisma
+import { AIT as AITPrisma } from '@prisma/client';
 import { AIT } from 'domain/ait.entity';
 
-// Mapper para converter de Prisma para a entidade de domínio AIT
-
 export class AITMapper {
-  // Método estático para mapear de Prisma para a entidade de domínio
   static toDomain(aitPrisma: AITPrisma): AIT {
     return new AIT({
       placaVeiculo: aitPrisma.placa_veiculo,
       dataInfracao: aitPrisma.data_infracao,
       descricao: aitPrisma.descricao,
       valorMulta: aitPrisma.valor_multa,
+      id: aitPrisma.id,
     });
   }
 
-  // Método estático para mapear de domínio para o formato que o Prisma espera
   static toPrisma(aitDomain: AIT): Omit<AITPrisma, 'id'> {
     return {
       placa_veiculo: aitDomain.placaVeiculo,

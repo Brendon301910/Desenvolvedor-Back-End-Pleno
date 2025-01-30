@@ -4,6 +4,7 @@ import { Decimal } from '@prisma/client/runtime/library';
 import { handleSafeParseZod } from 'src/lib/handleSafeParseZod';
 
 export interface AITProps {
+  id?: string;
   placaVeiculo: string;
   dataInfracao: Date;
   descricao: string;
@@ -17,12 +18,13 @@ export class AIT {
   private _descricao: string;
   private _valorMulta: Decimal;
 
-  constructor(props: AITProps) {
+  constructor(props: AITProps, id?: string) {
     this.validate(props);
     this._placaVeiculo = props.placaVeiculo;
     this._dataInfracao = props.dataInfracao;
     this._descricao = props.descricao;
     this._valorMulta = props.valorMulta;
+    this._id = props.id;
   }
 
   private validate(props: AITProps): void {
@@ -52,7 +54,6 @@ export class AIT {
     descricao: string,
     valorMulta: Decimal,
   ) {
-    // Criando objeto com novos valores
     const updatedProps: AITProps = {
       placaVeiculo,
       dataInfracao,
@@ -60,10 +61,8 @@ export class AIT {
       valorMulta,
     };
 
-    // Revalidando os novos valores
     this.validate(updatedProps);
 
-    // Atualizando os valores apenas se forem válidos
     this._placaVeiculo = placaVeiculo;
     this._dataInfracao = dataInfracao;
     this._descricao = descricao;
@@ -72,8 +71,6 @@ export class AIT {
   public get id() {
     return this._id;
   }
-
-  // Getters e Setters para os campos restantes
 
   public get placaVeiculo() {
     return this._placaVeiculo;

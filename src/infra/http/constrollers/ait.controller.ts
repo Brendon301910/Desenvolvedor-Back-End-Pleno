@@ -17,12 +17,12 @@ import { AIT } from 'domain/ait.entity';
 import { CreateAITDto } from '../dtos/create-ait.dto';
 import { AITViewModel } from '../view-models/ait-view-model';
 import { UpdateAITDto } from '../dtos/update-ait.dto';
-import { IAITRepository } from 'application/contracts/repositories/ait.repository';
 import { ICreateAITContract } from 'application/contracts/usecases/create-ait.contract';
 import { Decimal } from '@prisma/client/runtime/library';
 import { IGetAITContract } from 'application/contracts/usecases/get-ait.contract';
 import { IUpdateAITContract } from 'application/contracts/usecases/update-ait.contract';
 import { IRemoveAITContract } from 'application/contracts/usecases/remove-ait.contract';
+import { ProcessAITUseCase } from 'application/usecases/process-ait.usecase';
 
 @ApiTags('AITs')
 @Controller('aits')
@@ -32,25 +32,24 @@ export class AITController {
     private getAit: IGetAITContract,
     private updateAit: IUpdateAITContract,
     private removeAit: IRemoveAITContract,
+    private processAITUseCase: ProcessAITUseCase,
   ) {}
   @ApiOperation({ summary: 'Create a new AIT' })
   @Post()
   async create(@Body() body: CreateAITDto) {
     const { placa_veiculo, data_infracao, descricao, valor_multa } = body;
 
-    // Criar instância de AIT corretamente
     const [ait, error] = AIT.create({
       placaVeiculo: placa_veiculo,
-      dataInfracao: new Date(data_infracao), // Certifique-se de que é um Date válido
+      dataInfracao: new Date(data_infracao),
       descricao,
-      valorMulta: new Decimal(valor_multa), // Convertendo para Decimal corretamente
+      valorMulta: new Decimal(valor_multa),
     });
 
     if (error) {
       throw new BadRequestException(error.message);
     }
 
-    // Agora chamamos `execute` passando a instância correta de AIT
     const createdAIT = await this.createAit.execute(ait);
 
     return createdAIT;
@@ -81,7 +80,7 @@ export class AITController {
   })
   @ApiResponse({
     status: 404,
-    description: 'Placa não encontrada.', // Swagger exibe essa mensagem no erro 404
+    description: 'Placa não encontrada.',
   })
   @Get(':placaVeiculo')
   async findByPlacaVeiculo(@Param('placaVeiculo') placaVeiculo: string) {
@@ -90,7 +89,7 @@ export class AITController {
       return { data: AITViewModel.toHttpList(aits) };
     } catch (error) {
       if (error instanceof NotFoundException) {
-        throw error; // Repassa o erro corretamente
+        throw error;
       }
       throw new Error('Erro interno no servidor');
     }
@@ -123,5 +122,19 @@ export class AITController {
       message: 'AIT successfully deleted.',
       data: AITViewModel.toHttp(ait),
     };
+  }
+
+  @ApiOperation({ summary: 'Gets the list of processed AITs' })
+  @ApiResponse({
+    status: 200,
+    description: 'List of processed AITs',
+  })
+  @ApiResponse({
+    status: 500,
+    description: 'Error while querying processed AITs',
+  })
+  @Post('gerar-csv')
+  async processAit(): Promise<string> {
+    return await this.processAITUseCase.processAndGenerateCsv();
   }
 }

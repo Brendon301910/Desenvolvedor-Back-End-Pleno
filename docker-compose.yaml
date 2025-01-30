@@ -9,8 +9,10 @@ services:
       - '3000:3000'
     depends_on:
       - db
+      - rabbitmq # Certifique-se de que o RabbitMQ esteja em funcionamento antes de iniciar a aplicação
     environment:
       DATABASE_URL: postgresql://postgres:postgres@localhost:5432/aits?schema=public
+      RABBITMQ_URI: amqp://rabbitmq:5672 # Conexão com o RabbitMQ
     networks:
       - app-network
 
@@ -22,6 +24,18 @@ services:
       POSTGRES_DB: mydb
     ports:
       - '5432:5432'
+    networks:
+      - app-network
+
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: rabbitmq
+    ports:
+      - '5672:5672' # Porta para comunicação com o RabbitMQ
+      - '15672:15672' # Interface de gerenciamento do RabbitMQ
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
     networks:
       - app-network
 

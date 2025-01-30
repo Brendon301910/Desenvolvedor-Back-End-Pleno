@@ -48,7 +48,7 @@ export class PrismaAITRepository implements IAITRepository {
       where: { placa_veiculo: placaVeiculo },
     });
 
-    return AITMapper.toDomainList(aits); // Usa `toDomainList` para converter corretamente
+    return AITMapper.toDomainList(aits);
   }
 
   async update(id: string, ait: AIT): Promise<void> {

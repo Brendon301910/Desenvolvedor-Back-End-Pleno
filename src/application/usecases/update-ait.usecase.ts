@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Decimal } from '@prisma/client/runtime/library';
 import { IAITRepository } from 'application/contracts/repositories/ait.repository';
 import { IUpdateAITContract } from 'application/contracts/usecases/update-ait.contract';
@@ -21,6 +21,11 @@ export class UpdateAITUseCase implements IUpdateAITContract {
   async execute(request: PutAitRequest): Promise<void> {
     const { id, ait } = request;
     const aitRequest = await this.aitRepository.findById(id);
+
+    if (!aitRequest) {
+      throw new NotFoundException(`AIT com ID ${id} não encontrado.`);
+    }
+
     aitRequest.updateAIT(
       ait.placa_veiculo,
       ait.data_infracao,
