@@ -4,6 +4,7 @@ import { Decimal } from '@prisma/client/runtime/library';
 import { handleSafeParseZod } from 'src/lib/handleSafeParseZod';
 
 export interface AITProps {
+  id?: string;
   placaVeiculo: string;
   dataInfracao: Date;
   descricao: string;
@@ -17,12 +18,13 @@ export class AIT {
   private _descricao: string;
   private _valorMulta: Decimal;
 
-  constructor(props: AITProps) {
+  constructor(props: AITProps, id?: string) {
     this.validate(props);
     this._placaVeiculo = props.placaVeiculo;
     this._dataInfracao = props.dataInfracao;
     this._descricao = props.descricao;
     this._valorMulta = props.valorMulta;
+    this._id = props.id;
   }
 
   private validate(props: AITProps): void {

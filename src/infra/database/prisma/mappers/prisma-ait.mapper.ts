@@ -8,6 +8,7 @@ export class AITMapper {
       dataInfracao: aitPrisma.data_infracao,
       descricao: aitPrisma.descricao,
       valorMulta: aitPrisma.valor_multa,
+      id: aitPrisma.id,
     });
   }
 
