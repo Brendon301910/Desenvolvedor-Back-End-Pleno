@@ -44,7 +44,7 @@ describe('RemoveAITUseCase', () => {
     aitRepositoryMock.removeById.mockResolvedValue(null);
 
     await expect(useCase.removeById({ id: '123' })).rejects.toThrow(
-      new NotFoundException('AIT com ID 123 não encontrado.'),
+      new NotFoundException('AIT with ID 123 not found.'),
     );
     expect(aitRepositoryMock.removeById).toHaveBeenCalledWith('123');
     expect(aitRepositoryMock.removeById).toHaveBeenCalledTimes(1);

@@ -61,7 +61,7 @@ describe('GetAITUseCase', () => {
         useCase.getByPlacaVeiculo({
           placaVeiculo: 'ABC1234',
         }),
-      ).rejects.toThrow(new NotFoundException('Placa não encontrada'));
+      ).rejects.toThrow(new NotFoundException('Plate not found'));
     });
   });
 

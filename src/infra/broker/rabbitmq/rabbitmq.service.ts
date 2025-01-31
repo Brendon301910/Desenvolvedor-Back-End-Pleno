@@ -13,8 +13,8 @@ export class RabbitMQService {
       this.channel = await this.connection.createChannel();
       await this.channel.assertQueue(RabbitMQConfig.queue, { durable: true });
     } catch (err) {
-      console.error('Erro ao conectar com RabbitMQ', err);
-      throw new Error('Falha ao conectar ao RabbitMQ');
+      console.error('Error connecting to RabbitMQ', err);
+      throw new Error('Failed to connect to RabbitMQ');
     }
   }
 

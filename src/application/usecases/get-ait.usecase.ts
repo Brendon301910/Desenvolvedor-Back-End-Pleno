@@ -43,7 +43,7 @@ export class GetAITUseCase implements IGetAITContract {
     const aits = await this.aitRepository.findByPlacaVeiculo(placaVeiculo);
 
     if (!aits || aits.length === 0) {
-      throw new NotFoundException('Placa não encontrada');
+      throw new NotFoundException('Plate not found');
     }
 
     return aits;
@@ -53,7 +53,7 @@ export class GetAITUseCase implements IGetAITContract {
     const { limit, page } = request;
     const ait = await this.aitRepository.findAll(limit, page);
     if (ait == null) {
-      throw Error('ait não encontrada');
+      throw Error('ait not found');
     }
     return { data: ait, metadata: ait.total };
   }

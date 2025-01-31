@@ -31,16 +31,16 @@ export class AIT {
     const schema = z.object({
       placaVeiculo: z
         .string()
-        .min(7, 'a placa do veículo precisa ter no mínimo 7 caracteres'),
+        .min(7, 'The vehicle license plate must have at least 7 characters'),
       dataInfracao: z.date(),
       descricao: z
         .string()
-        .min(10, 'descrição precisa ter no mínimo 10 caracteres')
-        .max(100, 'descrição precisa ter no máximo 100 caracteres'),
+        .min(10, 'description must be at least 10 characters long')
+        .max(100, 'Description must be a maximum of 100 characters'),
       valorMulta: z
         .instanceof(Decimal)
         .refine((value) => value.gt(new Decimal(0)), {
-          message: 'o valor da multa precisa ser maior que zero',
+          message: 'the value of the traffic fine must be greater than zero',
         }),
     });
 
@@ -78,7 +78,9 @@ export class AIT {
 
   public set placaVeiculo(value: string) {
     if (value.length < 7) {
-      throw new Error('A placa do veículo precisa ter no mínimo 7 caracteres');
+      throw new Error(
+        'The vehicle license plate must have at least 7 characters',
+      );
     }
     this._placaVeiculo = value;
   }
@@ -89,7 +91,7 @@ export class AIT {
 
   public set dataInfracao(value: Date) {
     if (isNaN(value.getTime())) {
-      throw new Error('Data de infração inválida');
+      throw new Error('Invalid infraction date');
     }
     this._dataInfracao = value;
   }
@@ -101,7 +103,7 @@ export class AIT {
   public set descricao(value: string) {
     if (value.length < 10 || value.length > 100) {
       throw new Error(
-        'Descrição precisa ter no mínimo 10 caracteres e no máximo 100 caracteres',
+        'Description must have a minimum of 10 characters and a maximum of 100 characters',
       );
     }
     this._descricao = value;
@@ -113,7 +115,9 @@ export class AIT {
 
   public set valorMulta(value: Decimal) {
     if (value.toNumber() <= 0) {
-      throw new Error('O valor da multa precisa ser maior que zero');
+      throw new Error(
+        'the value of the traffic fine must be greater than zero',
+      );
     }
     this._valorMulta = value;
   }

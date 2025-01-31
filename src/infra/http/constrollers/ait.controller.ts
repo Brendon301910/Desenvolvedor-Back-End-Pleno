@@ -80,7 +80,7 @@ export class AITController {
   })
   @ApiResponse({
     status: 404,
-    description: 'Placa não encontrada.',
+    description: 'Plate not found.',
   })
   @Get(':placaVeiculo')
   async findByPlacaVeiculo(@Param('placaVeiculo') placaVeiculo: string) {

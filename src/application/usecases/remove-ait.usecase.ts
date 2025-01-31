@@ -17,7 +17,7 @@ export class RemoveAITUseCase implements IRemoveAITContract {
     const ait = await this.aitRepository.removeById(id);
 
     if (!ait) {
-      throw new NotFoundException(`AIT com ID ${id} não encontrado.`);
+      throw new NotFoundException(`AIT with ID ${id} not found.`);
     }
 
     return ait;

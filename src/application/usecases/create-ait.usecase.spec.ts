@@ -48,7 +48,7 @@ describe('CreateAITUseCase', () => {
       new AIT(invalidAitProps);
     } catch (error) {
       expect(error.message).toBe(
-        'placaVeiculo: too_small - a placa do veículo precisa ter no mínimo 7 caracteres',
+        'placaVeiculo: too_small - The vehicle license plate must have at least 7 characters',
       );
     }
   });
@@ -65,7 +65,7 @@ describe('CreateAITUseCase', () => {
       new AIT(invalidAitProps);
     } catch (error) {
       expect(error.message).toBe(
-        'valorMulta: custom - o valor da multa precisa ser maior que zero',
+        'valorMulta: custom - the value of the traffic fine must be greater than zero',
       );
     }
   });

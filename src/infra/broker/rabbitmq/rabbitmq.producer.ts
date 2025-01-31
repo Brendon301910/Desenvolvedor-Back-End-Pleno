@@ -18,14 +18,14 @@ export class RabbitMQProducer implements OnModuleInit {
   async sendToQueue(message: any) {
     try {
       if (!this.channel) {
-        throw new Error('Canal não foi criado corretamente');
+        throw new Error('Channel was not created correctly');
       }
       this.channel.sendToQueue(
         'csv_queue',
         Buffer.from(JSON.stringify(message)),
       );
     } catch (error) {
-      console.error('Erro ao enviar mensagem para o RabbitMQ:', error);
+      console.error('Error sending message to RabbitMQ:', error);
       throw error;
     }
   }

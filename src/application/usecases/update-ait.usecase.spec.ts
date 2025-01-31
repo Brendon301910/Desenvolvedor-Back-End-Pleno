@@ -70,7 +70,7 @@ describe('UpdateAITUseCase', () => {
       },
     };
     await expect(useCase.execute(updatedAITRequest)).rejects.toThrow(
-      new NotFoundException('AIT com ID 123 não encontrado.'),
+      new NotFoundException('AIT with ID 123 not found.'),
     );
     expect(aitRepositoryMock.findById).toHaveBeenCalledWith('123');
     expect(aitRepositoryMock.findById).toHaveBeenCalledTimes(1);

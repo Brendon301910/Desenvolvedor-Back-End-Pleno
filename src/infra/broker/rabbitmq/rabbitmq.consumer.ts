@@ -25,7 +25,7 @@ export class RabbitMQConsumer implements OnModuleDestroy {
       (msg) => {
         if (msg) {
           const messageContent = JSON.parse(msg.content.toString());
-          console.log('Mensagem recebida da fila:', messageContent);
+          console.log('Message received from queue:', messageContent);
 
           this.downloadMessage(messageContent);
 
@@ -53,12 +53,12 @@ export class RabbitMQConsumer implements OnModuleDestroy {
 
         fs.copyFileSync(sourcePath, destinationPath);
 
-        console.log('Arquivo copiado com sucesso para:', destinationPath);
+        console.log('File successfully copied to:', destinationPath);
       } else {
-        console.error('O arquivo não foi encontrado:', sourcePath);
+        console.error('The file was not found:', sourcePath);
       }
     } catch (error) {
-      console.error('Erro ao mover o arquivo:', error);
+      console.error('Error moving file:', error);
     }
   }
 

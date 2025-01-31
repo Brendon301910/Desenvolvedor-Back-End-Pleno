@@ -53,6 +53,6 @@ export class ProcessAITUseCase {
 
     await this.rabbitMQProducer.sendToQueue(filePath);
 
-    return `Arquivo CSV gerado com sucesso! Caminho: ${filePath}`;
+    return `CSV file generated successfully! Path: ${filePath}`;
   }
 }

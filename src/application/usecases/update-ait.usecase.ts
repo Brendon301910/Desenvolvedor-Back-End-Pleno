@@ -23,7 +23,7 @@ export class UpdateAITUseCase implements IUpdateAITContract {
     const aitRequest = await this.aitRepository.findById(id);
 
     if (!aitRequest) {
-      throw new NotFoundException(`AIT com ID ${id} não encontrado.`);
+      throw new NotFoundException(`AIT with ID ${id} not found.`);
     }
 
     aitRequest.updateAIT(
